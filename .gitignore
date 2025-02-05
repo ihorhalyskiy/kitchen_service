@@ -1,4 +1,4 @@
 .idea
 venv
 **__pycache__
-/kitchen_db.sqlite
+/db.sqlite3q

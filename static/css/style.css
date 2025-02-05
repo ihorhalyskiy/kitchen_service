@@ -1,0 +1,36 @@
+.text-center {
+    text-align: center; /* Вирівнювання заголовку по центру */
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh; /* Висота сторінки для забезпечення розміщення внизу */
+}
+
+.button-section {
+    margin-top: auto; /* Перемістити секцію з кнопками донизу */
+    padding-bottom: 20px; /* Додати нижній відступ для кращого вигляду */
+}
+
+.button-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Вирівняти заголовок та кнопку по горизонталі */
+}
+
+.button-group h2 {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Вирівняти кнопки праворуч */
+}
+
+.button-container a {
+    margin-left: 10px;
+    padding: 5px 10px; /* Зменшити розмір кнопок */
+}
