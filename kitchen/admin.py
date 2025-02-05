@@ -1,36 +1,50 @@
+from django import forms
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from .models import Cook, DishType, Ingredient, Dish
 
-class CookAdmin(admin.ModelAdmin):
+
+class CookAdminForm(forms.ModelForm):
+    years_of_experience = forms.ChoiceField(
+        choices=[(i, i) for i in range(1, 11)],
+        widget=forms.Select
+    )
+
+    class Meta:
+        model = Cook
+        fields = "__all__"
+
+
+class CookAdmin(UserAdmin):
+    form = CookAdminForm
     list_display = (
-        "user",
+        "username",
         "years_of_experience",
-        "get_first_name",
-        "get_last_name",
-        "get_email"
+        "first_name",
+        "last_name",
+        "email"
     )
     ordering = (
-        "user__first_name",
-        "user__last_name",
+        "first_name",
+        "last_name",
     )
     list_filter = ("years_of_experience",)
+    fieldsets = UserAdmin.fieldsets + (
+        (None, {"fields": ("years_of_experience",)}),
+    )
 
-    def get_first_name(self, obj):
-        return obj.user.first_name
-    get_first_name.short_description = "First Name"
-    get_first_name.admin_order_field = "user__first_name"
 
-    def get_last_name(self, obj):
-        return obj.user.last_name
-    get_last_name.short_description = "Last Name"
-    get_last_name.admin_order_field = "user__last_name"
+class DishAdmin(admin.ModelAdmin):
+    filter_horizontal = ("ingredients", "cooks")
+    list_display = (
+        "name",
+        "price",
+        "description",
+        "dish_type",
+    )
 
-    def get_email(self, obj):
-        return obj.user.email
-    get_email.short_description = "Email"
-    get_email.admin_order_field = "user__email"
 
 admin.site.register(Cook, CookAdmin)
 admin.site.register(DishType)
 admin.site.register(Ingredient)
-admin.site.register(Dish)
+admin.site.register(Dish, DishAdmin)
