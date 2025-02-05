@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Delete Dish</h1>
+
+<form method="post" action="{% url 'kitchen:delete_dish' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="dish_id">Select Dish to Delete</label>
+        <select class="form-control" id="dish_id" name="dish_id" required>
+            {% for dish in dishes %}
+                <option value="{{ dish.id }}">{{ dish.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+{% endblock %}

@@ -1,10 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">Quick Access Panel</h1>
+
+<div class="content-wrapper">
+    <div class="content-section">
+    </div>
+
+    <div class="button-section">
+        <div class="button-group">
+            <h2>View Assigned Cooks</h2>
+            <div class="button-container">
+                <a class="btn btn-sm btn-primary" href="{% url 'kitchen:add_assigned_cook' %}">Add</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'kitchen:delete_assigned_cook' %}">Delete</a>
+                <a class="btn btn-sm btn-info" href="{% url 'kitchen:assigned_cooks' %}">View</a>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="button-group">
+            <h2>Manage Dishes</h2>
+            <div class="button-container">
+                <a class="btn btn-sm btn-primary" href="{% url 'kitchen:add_dish' %}">Add</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'kitchen:delete_dish_list' %}">Delete</a>
+                <a class="btn btn-sm btn-info" href="{% url 'kitchen:dishes' %}">View</a>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="button-group">
+            <h2>Manage Ingredients</h2>
+            <div class="button-container">
+                <a class="btn btn-sm btn-primary" href="{% url 'kitchen:add_ingredient' %}">Add</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'kitchen:delete_ingredient_list' %}">Delete</a>
+                <a class="btn btn-sm btn-info" href="{% url 'kitchen:ingredients' %}">View</a>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="button-group">
+            <h2>Manage Dish Types</h2>
+            <div class="button-container">
+                <a class="btn btn-sm btn-primary" href="{% url 'kitchen:add_dishtype' %}">Add</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'kitchen:delete_dishtype_list' %}">Delete</a>
+                <a class="btn btn-sm btn-info" href="{% url 'kitchen:dishtypes' %}">View</a>
+            </div>
+        </div>
+
+        <hr>
+        <div class="button-group">
+            <h2>Kitchen Info</h2>
+            <div class="button-container">
+                <a class="btn btn-sm btn-info" href="{% url 'kitchen:kitchen_info' %}">View</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+<h1>Delete Assign Cook to Dishes</h1>
+
+<form method="post" action="{% url 'kitchen:delete_assign_cook_to_dishes' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="dish">Dish</label>
+        <select class="form-control" id="dish" name="dish_id">
+            {% for dish in dishes %}
+                <option value="{{ dish.id }}">{{ dish.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="cooks">Cooks</label>
+        <select multiple class="form-control" id="cooks" name="cook_ids">
+            {% for cook in cooks %}
+                <option value="{{ cook.id }}">{{ cook.first_name }} {{ cook.last_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-danger">Delete Assignment</button>
+</form>
+{% endblock %}

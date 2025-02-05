@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Delete Ingredient</h1>
+
+<form method="post" action="{% url 'kitchen:delete_ingredient' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="ingredient_id">Select Ingredient to Delete</label>
+        <select class="form-control" id="ingredient_id" name="ingredient_id" required>
+            {% for ingredient in ingredients %}
+                <option value="{{ ingredient.id }}">{{ ingredient.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-danger">Delete Ingredient</button>
+</form>
+{% endblock %}
