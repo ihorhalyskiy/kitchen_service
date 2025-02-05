@@ -1,18 +1,26 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import Cook, Dish, Ingredient, DishType
+from kitchen.models import Cook, Dish, Ingredient, DishType
 
 
 class KitchenTests(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.user = Cook.objects.create_user(username="testuser", password="testpass", first_name="Test",
-                                             last_name="User")
+        self.user = Cook.objects.create_user(
+            username="testuser",
+            password="testpass",
+            first_name="Test",
+            last_name="User"
+        )
         self.cook = Cook.objects.create(first_name="John", last_name="Doe")
         self.dish_type = DishType.objects.create(name="Main Course")
-        self.dish = Dish.objects.create(name="Test Dish", description="Test Description", price=10.00,
-                                        dish_type=self.dish_type)
+        self.dish = Dish.objects.create(
+            name="Test Dish",
+            description="Test Description",
+            price=10.00,
+            dish_type=self.dish_type
+        )
         self.ingredient = Ingredient.objects.create(name="Test Ingredient")
         self.dish.cooks.add(self.cook)
 
@@ -77,7 +85,10 @@ class KitchenTests(TestCase):
             "name": "New Ingredient"
         })
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(Ingredient.objects.filter(name="New Ingredient").exists())
+        self.assertTrue(
+            Ingredient.objects.filter(
+                name="New Ingredient"
+            ).exists())
 
     def test_delete_ingredient_view(self):
         self.client.login(username="testuser", password="testpass")
@@ -85,7 +96,11 @@ class KitchenTests(TestCase):
             "ingredient_id": self.ingredient.id
         })
         self.assertEqual(response.status_code, 302)
-        self.assertFalse(Ingredient.objects.filter(id=self.ingredient.id).exists())
+        self.assertFalse(
+            Ingredient.objects.filter(
+                id=self.ingredient.id
+            ).exists()
+        )
 
     def test_dishtypes_view(self):
         response = self.client.get(reverse("kitchen:dishtypes"))
@@ -102,8 +117,14 @@ class KitchenTests(TestCase):
 
     def test_delete_dishtype_view(self):
         self.client.login(username="testuser", password="testpass")
-        response = self.client.post(reverse("kitchen:delete_dishtype"), {
-            "dishtype_id": self.dish_type.id
-        })
+        response = self.client.post(
+            reverse(
+                "kitchen:delete_dishtype"),
+            {"dishtype_id": self.dish_type.id}
+        )
         self.assertEqual(response.status_code, 302)
-        self.assertFalse(DishType.objects.filter(id=self.dish_type.id).exists())
+        self.assertFalse(
+            DishType.objects.filter(
+                id=self.dish_type.id
+            ).exists()
+        )
