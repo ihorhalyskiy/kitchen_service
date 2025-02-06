@@ -59,24 +59,18 @@
 
 ## Tasks
 
-1. Create a superuser:
-    ```bash
-    python manage.py createsuperuser --username TestAdmin --email testadmin@example.com
-    ```
-    Password: `test123`
-
-2. Create a chef for functionality testing:
+1. **Create a chef for functionality testing:
     ```
     username='chef01', password='Test1234567890'
     ```
 
-3. **Creating Models:**
+4.**Creating Models:**
     - `Cook` model for managing chefs, inherited from `AbstractUser`.
     - `DishType` model for managing dish types.
     - `Ingredient` model for managing ingredients.
     - `Dish` model for managing dishes with fields for name, description, price, ingredients, chefs, and dish type.
 
-4. **Implementing Functionality:**
+5.**Implementing Functionality:**
     - Home page with user login form.
     - User registration.
     - Kitchen info for displaying general information about the kitchen.
@@ -85,7 +79,7 @@
     - Functions for adding, viewing, and deleting dish types.
     - Functions for assigning, viewing, and deleting chefs from dishes.
 
-5. **Testing:**
+6.**Testing:**
     - Writing unit tests for models.
     - Writing tests for functionality (views).
 
@@ -94,6 +88,12 @@
     python manage.py test
     ```
 
+   1. http://skitchen-service-portfolio-project.onrender.com
+      follow the link to test the functionality
+   2. data for authorization
+      username = chef01, 
+      password = Test1234567890
+      
 ## Authors
 
 Created by Ihor Halytskiy in 2025.
