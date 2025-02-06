@@ -9,3 +9,4 @@ kitchen_service/admin.py
 kitchen_service/apps.py
 .env
 /dump.json
+db.sqlite3
