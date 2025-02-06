@@ -2,15 +2,12 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'your-secret-key'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
@@ -32,6 +29,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,13 +59,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'kitchen_service.wsgi.application'
 
-# Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -109,9 +100,11 @@ USE_L10N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
+
 STATICFILES_DIRS = (BASE_DIR / "static",)
-STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATIC_ROOT = BASE_DIR / "staticfiles/"
 
 INTERNAL_IPS = [
     '127.0.0.1',
