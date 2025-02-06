@@ -88,7 +88,7 @@
     python manage.py test
     ```
 
-   1. http://skitchen-service-portfolio-project.onrender.com
+   1. https://kitchen-service-portfolio-project.onrender.com/
       follow the link to test the functionality
    2. data for authorization
       username = chef01, 
