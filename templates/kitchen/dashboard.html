@@ -1,63 +1,74 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="text-center">Quick Access Panel</h1>
+<div class="dashboard-container">
+    <!-- Верхній ряд -->
+    <div class="dashboard-row">
+        <!-- Kitchen Info -->
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <h2 class="card-title">Kitchen Info</h2>
+            <div class="card-buttons">
+                <a href="{% url 'kitchen:kitchen_info' %}" class="dash-btn">View</a>
+            </div>
+        </div>
 
-<div class="content-wrapper">
-    <div class="content-section">
+        <!-- View Assigned Cooks -->
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <h2 class="card-title">View Assigned Cooks</h2>
+            <div class="card-buttons">
+                <a href="{% url 'kitchen:add_assigned_cook' %}" class="dash-btn">Add</a>
+                <a href="{% url 'kitchen:delete_assigned_cook' %}" class="dash-btn">Delete</a>
+                <a href="{% url 'kitchen:assigned_cooks' %}" class="dash-btn">View</a>
+            </div>
+        </div>
     </div>
 
-    <div class="button-section">
-        <div class="button-group">
-            <h2>View Assigned Cooks</h2>
-            <div class="button-container">
-                <a class="btn btn-sm btn-primary" href="{% url 'kitchen:add_assigned_cook' %}">Add</a>
-                <a class="btn btn-sm btn-danger" href="{% url 'kitchen:delete_assigned_cook' %}">Delete</a>
-                <a class="btn btn-sm btn-info" href="{% url 'kitchen:assigned_cooks' %}">View</a>
+    <!-- Нижній ряд -->
+    <div class="dashboard-row">
+        <!-- Manage Dishes -->
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fas fa-utensils"></i>
+            </div>
+            <h2 class="card-title">Manage Dishes</h2>
+            <div class="card-buttons">
+                <a href="{% url 'kitchen:add_dish' %}" class="dash-btn">Add</a>
+                <a href="{% url 'kitchen:delete_dish_list' %}" class="dash-btn">Delete</a>
+                <a href="{% url 'kitchen:dishes' %}" class="dash-btn">View</a>
             </div>
         </div>
 
-        <hr>
-
-        <div class="button-group">
-            <h2>Manage Dishes</h2>
-            <div class="button-container">
-                <a class="btn btn-sm btn-primary" href="{% url 'kitchen:add_dish' %}">Add</a>
-                <a class="btn btn-sm btn-danger" href="{% url 'kitchen:delete_dish_list' %}">Delete</a>
-                <a class="btn btn-sm btn-info" href="{% url 'kitchen:dishes' %}">View</a>
+        <!-- Manage Dish Types -->
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fas fa-tags"></i>
+            </div>
+            <h2 class="card-title">Manage Dish Types</h2>
+            <div class="card-buttons">
+                <a href="{% url 'kitchen:add_dishtype' %}" class="dash-btn">Add</a>
+                <a href="{% url 'kitchen:delete_dishtype_list' %}" class="dash-btn">Delete</a>
+                <a href="{% url 'kitchen:dishtypes' %}" class="dash-btn">View</a>
             </div>
         </div>
 
-        <hr>
-
-        <div class="button-group">
-            <h2>Manage Ingredients</h2>
-            <div class="button-container">
-                <a class="btn btn-sm btn-primary" href="{% url 'kitchen:add_ingredient' %}">Add</a>
-                <a class="btn btn-sm btn-danger" href="{% url 'kitchen:delete_ingredient_list' %}">Delete</a>
-                <a class="btn btn-sm btn-info" href="{% url 'kitchen:ingredients' %}">View</a>
+        <!-- Manage Ingredients -->
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fas fa-carrot"></i>
             </div>
-        </div>
-
-        <hr>
-
-        <div class="button-group">
-            <h2>Manage Dish Types</h2>
-            <div class="button-container">
-                <a class="btn btn-sm btn-primary" href="{% url 'kitchen:add_dishtype' %}">Add</a>
-                <a class="btn btn-sm btn-danger" href="{% url 'kitchen:delete_dishtype_list' %}">Delete</a>
-                <a class="btn btn-sm btn-info" href="{% url 'kitchen:dishtypes' %}">View</a>
-            </div>
-        </div>
-
-        <hr>
-        <div class="button-group">
-            <h2>Kitchen Info</h2>
-            <div class="button-container">
-                <a class="btn btn-sm btn-info" href="{% url 'kitchen:kitchen_info' %}">View</a>
+            <h2 class="card-title">Manage Ingredients</h2>
+            <div class="card-buttons">
+                <a href="{% url 'kitchen:add_ingredient' %}" class="dash-btn">Add</a>
+                <a href="{% url 'kitchen:delete_ingredient_list' %}" class="dash-btn">Delete</a>
+                <a href="{% url 'kitchen:ingredients' %}" class="dash-btn">View</a>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
