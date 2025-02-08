@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Our Achievements</h1>
-<p>Here are some of the achievements of our kitchen:</p>
-<ul>
-    <li>Best Kitchen Award 2024</li>
-    <li>Top-rated dishes by food critics</li>
-    <li>1000+ satisfied customers</li>
-    <li>Innovative new dishes every month</li>
-    <li>Community service and engagement</li>
-</ul>
+<div class="title-container">
+    <h1 class="assigned-cooks-title">Our Achievements</h1>
+</div>
+
+<div class="auth-container">
+    <div class="auth-box">
+        <p>Here are some of the achievements of our kitchen:</p>
+        <ul class="achievements-list">
+            <li class="achievement-item"><i class="fas fa-check-circle" style="color: green;"></i> Best Kitchen Award 2024</li>
+            <li class="achievement-item"><i class="fas fa-check-circle" style="color: green;"></i> Top-rated dishes by food critics</li>
+            <li class="achievement-item"><i class="fas fa-check-circle" style="color: green;"></i> 1000+ satisfied customers</li>
+            <li class="achievement-item"><i class="fas fa-check-circle" style="color: green;"></i> Innovative new dishes every month</li>
+            <li class="achievement-item"><i class="fas fa-check-circle" style="color: green;"></i> Community service and engagement</li>
+        </ul>
+    </div>
+</div>
 {% endblock %}

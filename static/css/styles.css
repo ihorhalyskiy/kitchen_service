@@ -35,12 +35,13 @@ body {
 }
 
 .nav-container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    padding: 0 2rem;
 }
 
 /* Logo */
@@ -84,6 +85,96 @@ body {
     color: var(--primary-color);
 }
 
+/* Main Content */
+.main-content {
+    margin-top: 3rem;
+}
+
+/* Dashboard стилі */
+.dashboard-container {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Перший ряд - 2 картки */
+.dashboard-row:first-child .dashboard-card {
+    flex: 0 1 calc(40% - 1rem);
+    min-width: 300px;
+}
+
+/* Другий ряд - 3 картки */
+.dashboard-row:last-child .dashboard-card {
+    flex: 0 1 calc(30% - 1rem);
+    min-width: 300px;
+}
+
+.dashboard-card {
+    background: var(--secondary-color); /* Темно-синій фон як у навігації */
+    border-radius: 15px;
+    padding: 2rem;
+    border: 2px solid #34495e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Щоб кнопки не виходили за межі */
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    border-color: #3498db;
+}
+
+.card-title {
+    color: var(--text-color); /* Змінюємо на світлий колір */
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.card-buttons {
+    display: flex;
+    gap: 0.8rem; /* Зменшуємо відступ між кнопками */
+    justify-content: center;
+    margin: 0 -0.4rem; /* Компенсуємо padding кнопок */
+}
+
+.dash-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.7rem; /* Зменшуємо padding для кнопок */
+    border-radius: 8px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: #404952; /* Сірий фон для кнопок */
+    min-width: 80px; /* Зменшуємо мінімальну ширину */
+    margin: 0 0.4rem;
+}
+
+.dash-btn:hover {
+    transform: translateY(-2px);
+    background: #4a545e; /* Трохи світліший сірий при наведенні */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
 /* Контейнер авторизації */
 .auth-container {
     min-height: 100vh;
@@ -100,25 +191,6 @@ body {
     width: 400px;
     max-width: 100%;
     box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-}
-
-/* Логотип і заголовок */
-.logo {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.logo i {
-    font-size: 48px;
-    color: var(--primary-color);
-    text-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
-    margin-bottom: 15px;
-}
-
-.logo h1 {
-    color: var(--text-color);
-    font-size: 24px;
-    margin-top: 10px;
 }
 
 /* Форма */
@@ -165,7 +237,7 @@ body {
     cursor: pointer;
 }
 
-/* Кнопки */
+/* Кнопки авторизації */
 .btn {
     width: 100%;
     padding: 12px;
@@ -225,96 +297,6 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* Посилання */
-.auth-links {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.auth-links a {
-    flex: 1;
-}
-
-/* Content Layout */
-.content-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.content-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    background: var(--secondary-color);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-/* Lists and Items */
-.list-group-item {
-    cursor: pointer;
-    padding: 15px 20px;
-    margin-bottom: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    background: var(--nav-hover-color);
-    color: var(--text-color);
-    transition: all 0.3s ease;
-}
-
-.list-group-item:hover {
-    background: var(--secondary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-/* Pagination */
-.pagination {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.pagination .step-links {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.pagination a {
-    padding: 5px 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    text-decoration: none;
-    color: var(--text-color);
-    background: var(--nav-hover-color);
-    transition: all 0.3s ease;
-}
-
-.pagination a:hover {
-    background: var(--primary-color);
-}
-
-.pagination .current {
-    padding: 5px 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    background: var(--primary-color);
-    color: var(--text-color);
-}
-
-/* Search Section */
-.search-section {
-    margin-bottom: 40px;
-}
-
-.search-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 /* Error Messages */
 .error-message {
     color: var(--error-color);
@@ -325,11 +307,18 @@ body {
 
 /* Utilities */
 .text-center {
-    text-align: center;
+
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
+/* Адаптивний дизайн */
+@media (max-width: 1200px) {
+    .dashboard-row:first-child .dashboard-card,
+    .dashboard-row:last-child .dashboard-card {
+        flex: 0 1 calc(45% - 1rem);
+    }
+}
+
+@media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
         gap: 1rem;
@@ -338,45 +327,335 @@ body {
     .nav-menu {
         width: 100%;
         justify-content: center;
-    }
-
-    .auth-section {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .nav-menu {
         flex-direction: column;
-        align-items: stretch;
     }
 
     .nav-link {
+        width: 100%;
         text-align: center;
         justify-content: center;
     }
 
-    .content-container {
+    .dashboard-container {
         padding: 1rem;
     }
 
-    .button-group {
-        flex-direction: column;
-        gap: 1rem;
+    .dashboard-row:first-child .dashboard-card,
+    .dashboard-row:last-child .dashboard-card {
+        flex: 0 1 100%;
     }
 
-    .button-container {
-        justify-content: center;
+    .card-buttons {
+        flex-direction: column;
+        gap: 0.75rem;
     }
 
-    .auth-links {
-        flex-direction: column;
+    .dash-btn {
+        width: 100%;
     }
 
     .auth-box {
         padding: 20px;
     }
+}
+/* Стилі для Kitchen Information */
+.dish-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dish-block {
+    background: var(--secondary-color);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 2px solid #34495e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: var(--text-color);
+}
+
+.dish-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    border-color: #3498db;
+}
+
+.dish-block h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.dish-block p {
+    margin: 0.8rem 0;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.dish-block strong {
+    color: #3498db;
+    font-weight: 500;
+}
+
+/* Оновлені стилі для пагінації */
+.pagination {
+    margin: 2rem 0;
+    text-align: center;
+    list-style-type: none;
+}
+
+.pagination .step-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}
+
+.pagination a {
+    background: #404952;
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.pagination a:hover {
+    background: #4a545e;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pagination .current {
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    background: var(--secondary-color);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+/* Адаптивний дизайн для dish-list */
+@media (max-width: 768px) {
+    .dish-list {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .pagination .step-links {
+        flex-wrap: wrap;
+    }
+}
+/* Стилі для Assigned Cooks */
+
+.cook-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cook-block {
+    background: var(--secondary-color);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 2px solid #34495e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: var(--text-color);
+}
+
+.cook-block h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.dishes-label {
+    color: #3498db;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+}
+
+.cook-block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.cook-block li {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #404952;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    width: fit-content; /* Ширина по контенту */
+    min-width: 120px; /* Мінімальна ширина */
+}
+
+.cook-block li:hover {
+    background: #4a545e;
+    transform: translateX(5px);
+}
+
+/* Адаптивний дизайн */
+@media (max-width: 768px) {
+    .cook-list {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+}
+
+.title-container {
+    text-align: center; /* Центруємо текст всередині контейнера */
+    margin-bottom: 2rem; /* Відступ знизу */
+}
+
+.assigned-cooks-title {
+    display: inline-block; /* Залишаємо inline-block */
+    background: var(--secondary-color); /* Фон як у карток */
+    color: var(--text-color); /* Колір тексту */
+    padding: 1rem 2rem; /* Відступи: вертикальні 1rem, горизонтальні 2rem */
+    border-radius: 10px; /* Закруглені краї */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тінь для ефекту */
+}
+
+
+/* Стилі для заголовка */
+.title-container {
+    text-align: center; /* Центруємо текст всередині контейнера */
+    margin-bottom: 2rem; /* Відступ знизу */
+}
+
+
+.delete-assigned-cook {
+    display: inline-block; /* Залишаємо inline-block */
+    background: var(--secondary-color); /* Фон як у картках */
+    color: var(--text-color); /* Колір тексту */
+    padding: 1rem 2rem; /* Відступи: вертикальні 1rem, горизонтальні 2rem */
+    border-radius: 10px; /* Закруглені краї */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тінь для ефекту */
+}
+
+/* Стилі для форми */
+.form-group {
+    margin-bottom: 20px; /* Відступ між групами */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    background: var(--input-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 16px;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.form-group select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.2);
+}
+
+/* Стилі для кнопки видалення */
+.btn-danger {
+    background: var(--primary-color); /* Червоний фон для кнопки видалення */
+    color: var(--text-color);
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-danger:hover {
+    background: #c0392b; /* Темніший червоний при наведенні */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+/* Стилі для контейнера авторизації */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh; /* Висота для центрування */
+}
+.auth-box {
+    background: var(--secondary-color);
+    padding: 40px;
+    border-radius: 20px;
+    width: 400px;
+    max-width: 100%;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+/* Адаптивний дизайн */
+@media (max-width: 768px) {
+    .auth-box {
+        width: 90%; /* Зменшуємо ширину на малих екранах */
+    }
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background: var(--input-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 16px;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    height: 150px; /* Задаємо висоту */
+    resize: vertical; /* Дозволяємо змінювати висоту */
+}
+
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.2);
+}
+
+/* Стилі для списку досягнень */
+.achievements-list {
+    list-style: none; /* Прибираємо стандартні маркери */
+    padding: 0; /* Прибираємо відступи */
+    margin: 0; /* Прибираємо відступи */
+}
+
+.achievement-item {
+    padding: 0.5rem 1rem; /* Відступи для елементів списку */
+    background: #404952; /* Сірий фон для досягнень */
+    border-radius: 8px; /* Закруглені краї */
+    margin: 0.5rem 0; /* Відступи між елементами */
+    transition: background 0.3s ease; /* Анімація при наведенні */
+}
+
+.achievement-item:hover {
+    background: #4a545e; /* Світліший відтінок при наведенні */
 }

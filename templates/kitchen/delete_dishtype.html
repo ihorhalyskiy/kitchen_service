@@ -1,18 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Delete Dish Type</h1>
+<div class="title-container">
+    <h1 class="assigned-cooks-title">Delete Dish Type</h1>
+</div>
 
-<form method="post" action="{% url 'kitchen:delete_dishtype' %}">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="dishtype_id">Select Dish Type to Delete</label>
-        <select class="form-control" id="dishtype_id" name="dishtype_id" required>
-            {% for dishtype in dishtypes %}
-                <option value="{{ dishtype.id }}">{{ dishtype.name }}</option>
-            {% endfor %}
-        </select>
+<div class="auth-container">
+    <div class="auth-box">
+        <form method="post" action="{% url 'kitchen:delete_dishtype' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="dishtype_id">Select Dish Type to Delete</label>
+                <select class="form-control" id="dishtype_id" name="dishtype_id" required>
+                    {% for dishtype in dishtypes %}
+                        <option value="{{ dishtype.id }}">{{ dishtype.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-danger">Delete Dish Type</button>
+        </form>
     </div>
-    <button type="submit" class="btn btn-danger">Delete Dish Type</button>
-</form>
+</div>
 {% endblock %}

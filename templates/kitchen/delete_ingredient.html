@@ -1,18 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Delete Ingredient</h1>
+<div class="title-container">
+    <h1 class="assigned-cooks-title">Delete Ingredient</h1>
+</div>
 
-<form method="post" action="{% url 'kitchen:delete_ingredient' %}">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="ingredient_id">Select Ingredient to Delete</label>
-        <select class="form-control" id="ingredient_id" name="ingredient_id" required>
-            {% for ingredient in ingredients %}
-                <option value="{{ ingredient.id }}">{{ ingredient.name }}</option>
-            {% endfor %}
-        </select>
+<div class="auth-container">
+    <div class="auth-box">
+        <form method="post" action="{% url 'kitchen:delete_ingredient' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="ingredient_id">Select Ingredient to Delete</label>
+                <select class="form-control" id="ingredient_id" name="ingredient_id" required>
+                    {% for ingredient in ingredients %}
+                        <option value="{{ ingredient.id }}">{{ ingredient.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-danger">Delete Ingredient</button>
+        </form>
     </div>
-    <button type="submit" class="btn btn-danger">Delete Ingredient</button>
-</form>
+</div>
 {% endblock %}

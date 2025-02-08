@@ -191,7 +191,7 @@ def assigned_cooks(request):
     ).distinct().order_by(
         "first_name"
     )
-    paginator = Paginator(assigned_cooks_list, 5)
+    paginator = Paginator(assigned_cooks_list, 4)
 
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -386,7 +386,12 @@ def delete_dishtype_list(request):
 
 def dishtypes(request):
     dishtypes_list = DishType.objects.all()
-    context = {"dishtypes": dishtypes_list}
-    return render(
-        request, "kitchen/dishtypes.html", context
-    )
+    paginator = Paginator(dishtypes_list, 5)
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        "page_obj": page_obj,
+    }
+    return render(request, "kitchen/dishtypes.html", context)

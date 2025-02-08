@@ -1,26 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Add Assigned Cook</h1>
+<div class="title-container">
+    <h1 class="assigned-cooks-title">Add Assigned Cook</h1>
+</div>
 
-<form method="post" action="{% url 'kitchen:add_assigned_cook' %}">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="cook">Cook</label>
-        <select class="form-control" id="cook" name="cook_id">
-            {% for cook in cooks %}
-                <option value="{{ cook.id }}">{{ cook.first_name }} {{ cook.last_name }}</option>
-            {% endfor %}
-        </select>
+<div class="auth-container">
+    <div class="auth-box">
+        <form method="post" action="{% url 'kitchen:add_assigned_cook' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="cook">Cook</label>
+                <select class="form-control" id="cook" name="cook_id">
+                    {% for cook in cooks %}
+                        <option value="{{ cook.id }}">{{ cook.first_name }} {{ cook.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dish">Dish</label>
+                <select class="form-control" id="dish" name="dish_id">
+                    {% for dish in dishes %}
+                        <option value="{{ dish.id }}">{{ dish.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Assigned Cook</button>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="dish">Dish</label>
-        <select class="form-control" id="dish" name="dish_id">
-            {% for dish in dishes %}
-                <option value="{{ dish.id }}">{{ dish.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Add Assigned Cook</button>
-</form>
+</div>
 {% endblock %}

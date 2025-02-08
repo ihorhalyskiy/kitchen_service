@@ -1,11 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Dish Types</h1>
+<div class="title-container">
+    <h1 class="assigned-cooks-title">Dish Types</h1>
+</div>
 
-<ul>
-    {% for dishtype in dishtypes %}
-        <li>{{ dishtype.name }}</li>
-    {% endfor %}
-</ul>
+<div class="auth-container">
+    <div class="auth-box">
+        <ul class="dish-type-list">
+            {% for dishtype in page_obj %}
+                <li class="dish-type-item">{{ dishtype.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock %}

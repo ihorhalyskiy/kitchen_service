@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Kitchen Information</h1>
+<div class="title-container">
+    <h1 class="assigned-cooks-title">Kitchen Info</h1>
+</div>
 
 <div class="dish-list">
     {% for dish in page_obj %}
