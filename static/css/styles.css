@@ -1,55 +1,276 @@
-.text-center {
-    text-align: center;
+:root {
+    --primary-color: #e74c3c;
+    --secondary-color: #2c3e50;
+    --background-dark: #1a1a1a;
+    --text-color: #ecf0f1;
+    --nav-hover-color: #34495e;
+    --border-color: #465c71;
+    --hover-color: #c0392b;
+    --input-bg: #2c3e50;
+    --error-color: #e74c3c;
 }
 
-.content-wrapper {
+/* Базові стилі */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: var(--background-dark);
+    min-height: 100vh;
+    color: var(--text-color);
+}
+
+/* Header & Navigation */
+.main-header {
+    background: var(--secondary-color);
+    padding: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.button-section {
-    margin-top: auto;
-    padding-bottom: 20px;
-}
-
-.button-group {
+/* Logo */
+.logo-container .logo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex: 1;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
-.button-group h2 {
-    margin-right: 20px;
-    flex: 1;
+.logo i {
+    color: var(--primary-color);
+    margin-right: 10px;
+    font-size: 1.8rem;
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
 }
 
-.button-container {
+/* Navigation Menu */
+.nav-menu {
     display: flex;
-    justify-content: flex-end;
-    flex: 2;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
-.button-container a {
-    margin-left: 10px;
-    padding: 5px 10px;
-}
-
-.dish-list {
+.nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-link:hover {
+    background: var(--nav-hover-color);
+    color: var(--primary-color);
+}
+
+/* Контейнер авторизації */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.auth-box {
+    background: var(--secondary-color);
+    padding: 40px;
+    border-radius: 20px;
+    width: 400px;
+    max-width: 100%;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+/* Логотип і заголовок */
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo i {
+    font-size: 48px;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+    margin-bottom: 15px;
+}
+
+.logo h1 {
+    color: var(--text-color);
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+/* Форма */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    background: var(--input-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 16px;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.2);
+}
+
+/* Remember Me */
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.remember-me input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Кнопки */
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--text-color);
+}
+
+.btn-primary:hover {
+    background: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+.btn-secondary {
+    background: var(--nav-hover-color);
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Logout Button */
+.logout-btn {
+    background: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logout-btn:hover {
+    background: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Посилання */
+.auth-links {
+    display: flex;
+    gap: 10px;
     margin-top: 20px;
 }
 
-.dish-block {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.auth-links a {
+    flex: 1;
 }
 
+/* Content Layout */
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.content-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Lists and Items */
+.list-group-item {
+    cursor: pointer;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: var(--nav-hover-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Pagination */
 .pagination {
     margin-top: 20px;
     text-align: center;
@@ -63,31 +284,27 @@
 
 .pagination a {
     padding: 5px 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     text-decoration: none;
+    color: var(--text-color);
+    background: var(--nav-hover-color);
+    transition: all 0.3s ease;
+}
+
+.pagination a:hover {
+    background: var(--primary-color);
 }
 
 .pagination .current {
     padding: 5px 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
-    background-color: #f5f5f5;
+    background: var(--primary-color);
+    color: var(--text-color);
 }
 
-.list-group-item {
-    cursor: pointer;
-    padding: 15px 20px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-.list-group-item:hover {
-    background-color: #f1f1f1;
-}
-
+/* Search Section */
 .search-section {
     margin-bottom: 40px;
 }
@@ -95,22 +312,71 @@
 .search-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    gap: 10px;
 }
 
-.search-container input {
-    margin-bottom: 10px;
+/* Error Messages */
+.error-message {
+    color: var(--error-color);
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
 }
 
-.list-group-item {
-    cursor: pointer;
-    padding: 15px 20px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+/* Utilities */
+.text-center {
+    text-align: center;
 }
 
-.list-group-item:hover {
-    background-color: #f1f1f1;
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-menu {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .auth-section {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-link {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .content-container {
+        padding: 1rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .button-container {
+        justify-content: center;
+    }
+
+    .auth-links {
+        flex-direction: column;
+    }
+
+    .auth-box {
+        padding: 20px;
+    }
 }
