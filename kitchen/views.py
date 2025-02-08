@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, get_user_model
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import Cook, Dish, Ingredient, DishType
@@ -42,6 +42,9 @@ def home(request):
     )
 
 
+User = get_user_model()
+
+
 def register(request):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -55,7 +58,8 @@ def register(request):
                     password=password
                 )
                 user.save()
-                return redirect("home")
+                login(request, user)
+                return redirect("kitchen:dashboard")
             else:
                 return render(
                     request,
