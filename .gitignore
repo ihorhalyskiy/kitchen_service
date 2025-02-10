@@ -1,12 +1,10 @@
 .idea
 venv
 **__pycache__
-/db.sqlite3q
 .flake8
 kitchen_service/tests.py
 kitchen_service/models.py
 kitchen_service/admin.py
 kitchen_service/apps.py
 .env
-/dump.json
-db.sqlite3
+/dump.json!/db.sqlite3
