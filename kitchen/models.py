@@ -1,28 +1,30 @@
 from django.db import models
+
 from django.contrib.auth.models import AbstractUser
+
 from django.conf import settings
 
 
 class Cook(AbstractUser):
     years_of_experience = models.IntegerField(default=0)
 
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
     class Meta:
         verbose_name = "cook"
         verbose_name_plural = "cooks"
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class DishType(models.Model):
     name = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = "dish type"
         verbose_name_plural = "dish types"
+
+    def __str__(self):
+        return self.name
 
 
 class Ingredient(models.Model):

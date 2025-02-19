@@ -1,16 +1,50 @@
-from django.core.paginator import Paginator
-from django.shortcuts import redirect, render
-from django.contrib.auth import login, authenticate, get_user_model
 from django.contrib import messages
-from django.contrib.auth.models import User
-from .models import Cook, Dish, Ingredient, DishType
-from django.shortcuts import get_object_or_404
-from .forms import UserLoginForm
+
+from django.core.paginator import Paginator
+
+from django.db.models import Value, CharField
+
+from django.db.models.functions import Concat
+
+from django.urls import reverse_lazy
+
+from django.views import View
+
+from django.contrib.auth import (
+    authenticate,
+    login,
+    get_user_model
+)
+from django.shortcuts import (
+    redirect,
+    render,
+    get_object_or_404
+)
+
+from django.views.generic import (
+    ListView,
+    CreateView,
+    DeleteView,
+    UpdateView
+)
+
+from kitchen.forms import (
+    UserLoginForm,
+    DishForm,
+    IngredientForm,
+    CookForm
+)
+
+from kitchen.models import (
+    Dish,
+    Cook,
+    Ingredient
+)
 
 
 def home(request):
     if request.user.is_authenticated:
-        return redirect("kitchen:dashboard")
+        return redirect("kitchen:kitchen_info")
 
     if request.method == "POST":
         form = UserLoginForm(request, data=request.POST)
@@ -22,7 +56,7 @@ def home(request):
                 login(request, user)
                 if not form.cleaned_data.get("remember_me"):
                     request.session.set_expiry(0)
-                return redirect("kitchen:dashboard")
+                return redirect("kitchen:kitchen_info")
             else:
                 messages.error(
                     request,
@@ -35,6 +69,7 @@ def home(request):
             )
     else:
         form = UserLoginForm()
+
     return render(
         request,
         "kitchen/home.html",
@@ -52,350 +87,277 @@ def register(request):
         password2 = request.POST.get("password2")
 
         if password == password2:
-            if not User.objects.filter(username=username).exists():
+            if not User.objects.filter(
+                    username=username
+            ).exists():
                 user = User.objects.create_user(
                     username=username,
                     password=password
                 )
                 user.save()
                 login(request, user)
-                return redirect("kitchen:dashboard")
+                return redirect("kitchen:kitchen_info")
             else:
                 return render(
                     request,
                     "kitchen/register.html",
                     {"error": "Username already exists"}
                 )
-    return render(
-        request,
-        "kitchen/register.html"
-    )
+
+    return render(request, "kitchen/register.html")
 
 
-def dashboard(request):
-    dishes = Dish.objects.all()
-    cooks = Cook.objects.all()
-    ingredients = Ingredient.objects.all()
+class KitchenInfoView(ListView):
 
-    context = {
-        "dishes": dishes,
-        "cooks": cooks,
-        "ingredients": ingredients,
-    }
-    return render(
-        request,
-        "kitchen/dashboard.html",
-        context
-    )
+    model = Dish
+    template_name = "kitchen/kitchen_info.html"
+    context_object_name = "Information_page"
+    paginate_by = 12
 
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related(
+            "cooks",
+            "ingredients",
+            "dish_type"
+        ).order_by("name")
 
-def kitchen_info(request):
-    dishes_list = Dish.objects.prefetch_related(
-        "cooks", "ingredients", "dish_type"
-    ).order_by("name")
-    paginator = Paginator(dishes_list, 6)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    context = {
-        "page_obj": page_obj,
-    }
-    return render(
-        request,
-        "kitchen/kitchen_info.html",
-        context
-    )
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        paginator = Paginator(self.get_queryset(), self.paginate_by)
+        page_number = self.request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+        context["Information_page"] = page_obj
+        return context
 
 
-def achievements(request):
-    return render(
-        request,
-        "kitchen/achievements.html"
-    )
+class DishesView(ListView):
+
+    model = Dish
+    template_name = "kitchen/dishes.html"
+    context_object_name = "dishes_page"
+    paginate_by = 8
+
+    def get_queryset(self):
+        query = self.request.GET.get("dish_name")
+        if query:
+            return Dish.objects.filter(name__icontains=query).order_by("name")
+        else:
+            return Dish.objects.order_by("name")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["query"] = self.request.GET.get("dish_name")
+        return context
 
 
-def dishes(request):
-    dishes_list = Dish.objects.order_by("name")
-    paginator = Paginator(dishes_list, 5)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-    return render(
-        request,
-        "kitchen/dishes.html",
-        {"page_obj": page_obj}
-    )
+class DishCreateView(CreateView):
+
+    model = Dish
+    form_class = DishForm
+    template_name = "kitchen/dish_form.html"
+    success_url = reverse_lazy("kitchen:dishes")
 
 
-def add_dish(request):
-    if request.method == "POST":
-        name = request.POST.get("name")
-        description = request.POST.get("description")
-        price = request.POST.get("price")
-        dish_type_id = request.POST.get("dish_type")
-        dish_type = DishType.objects.get(id=dish_type_id)
-        dish = Dish(
-            name=name,
-            description=description,
-            price=price,
-            dish_type=dish_type
+class DishDeleteView(DeleteView):
+
+    model = Dish
+    template_name = "kitchen/dishes.html"
+    success_url = reverse_lazy("kitchen:dishes")
+
+
+class DishRemoveFromCookView(View):
+
+    def post(self, request, dish_id, cook_id):
+        dish = get_object_or_404(Dish, id=dish_id)
+        cook = get_object_or_404(Cook, id=cook_id)
+        cook.dishes.remove(dish)
+        return redirect("kitchen:cooks")
+
+    def get(self, request, dish_id, cook_id):
+        dish = get_object_or_404(Dish, id=dish_id)
+        cook = get_object_or_404(Cook, id=cook_id)
+        return render(
+            request,
+            "kitchen/dishes.html",
+            {"dish": dish, "cook": cook}
         )
-        dish.save()
-        return redirect("kitchen:dashboard")
-    dish_types = DishType.objects.all()
-    return render(
-        request,
-        "kitchen/add_dish.html",
-        {"dish_types": dish_types}
-    )
 
 
-def delete_dish(request):
-    dishes = Dish.objects.all()
-    if request.method == "POST":
-        dish_id = request.POST.get("dish_id")
-        dish = Dish.objects.get(id=dish_id)
-        dish.delete()
-        return redirect("kitchen:dashboard")
-    return render(
-        request,
-        "kitchen/delete_dish.html",
-        {"dishes": dishes}
-    )
+class EditDishPriceView(UpdateView):
+
+    model = Dish
+    template_name = "kitchen/edit_dish_price.html"
+    fields = ["price"]
+    success_url = reverse_lazy("kitchen:dishes")
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
 
 
-def delete_dish_list(request):
-    dishes = Dish.objects.all()
-    return render(
-        request,
-        "kitchen/delete_dish.html",
-        {"dishes": dishes}
-    )
+class IngredientsView(ListView):
+    model = Ingredient
+    template_name = "kitchen/ingredients.html"
+    context_object_name = "ingredients_page"
+    paginate_by = 24
+
+    def get_queryset(self):
+        query = self.request.GET.get("ingredient_name")
+        if query:
+            return Ingredient.objects.filter(
+                name__icontains=query
+            ).order_by("name")
+        else:
+            return Ingredient.objects.order_by("name")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["query"] = self.request.GET.get("ingredient_name")
+        return context
 
 
-def cooks(request):
-    cooks_list = Cook.objects.exclude(
-        first_name__isnull=True).exclude(
-        first_name__exact='').order_by(
-        "first_name"
-    )
-    paginator = Paginator(cooks_list, 5)
-
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-    return render(
-        request,
-        "kitchen/cooks.html",
-        {"page_obj": page_obj}
-    )
+class IngredientCreateView(CreateView):
+    model = Ingredient
+    form_class = IngredientForm
+    template_name = "kitchen/create_ingredient.html"
+    success_url = reverse_lazy("kitchen:ingredients")
 
 
-def assigned_cooks(request):
-    assigned_cooks_list = Cook.objects.filter(
-        dishes__isnull=False
-    ).distinct().order_by(
-        "first_name"
-    )
-    paginator = Paginator(assigned_cooks_list, 4)
-
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-
-    context = {
-        "assigned_cooks": page_obj,
-    }
-    return render(
-        request,
-        "kitchen/assigned_cooks.html",
-        context
-    )
-
-
-def add_assigned_cook(request):
-    if request.method == "POST":
-        cook_id = request.POST.get("cook_id")
-        dish_id = request.POST.get("dish_id")
-        cook = Cook.objects.get(id=cook_id)
-        dish = Dish.objects.get(id=dish_id)
-        dish.cooks.add(cook)
-        return redirect("kitchen:assigned_cooks")
-    cooks = Cook.objects.all()
-    dishes = Dish.objects.all()
-    context = {
-        "cooks": cooks,
-        "dishes": dishes,
-    }
-    return render(
-        request,
-        "kitchen/add_assigned_cook.html",
-        context
-    )
-
-
-def delete_assigned_cook(request):
-    if request.method == "POST":
-        cook_id = request.POST.get("cook_id")
-        dish_id = request.POST.get("dish_id")
-        cook = Cook.objects.get(id=cook_id)
-        dish = Dish.objects.get(id=dish_id)
-        dish.cooks.remove(cook)
-        return redirect("kitchen:assigned_cooks")
-    assigned_cooks = Cook.objects.filter(dishes__isnull=False).distinct()
-    context = {"assigned_cooks": assigned_cooks}
-    return render(
-        request,
-        "kitchen/delete_assigned_cook.html",
-        context
-    )
-
-
-def remove_cook_from_dish(request, dish_id, cook_id):
-    dish = get_object_or_404(Dish, id=dish_id)
-    cook = get_object_or_404(Cook, id=cook_id)
-    dish.cooks.remove(cook)
-    return redirect("kitchen:view_assigned_cooks")
-
-
-def assign_cooks(request):
-    if request.method == "POST":
-        dish_id = request.POST.get("dish")
-        cook_ids = request.POST.getlist("cooks")
-
-        dish = Dish.objects.get(id=dish_id)
-        cooks = Cook.objects.filter(id__in=cook_ids)
-
-        dish.cooks.set(cooks)
-        return redirect("kitchen:dashboard")
-
-    return redirect("kitchen:dashboard")
-
-
-def view_assigned_cooks(request):
-    dish_list = Dish.objects.prefetch_related(
-        "cooks",
-        "ingredients",
-        "dish_type"
-    ).order_by("name").all()
-    paginator = Paginator(dish_list, 5)
-
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-
-    context = {
-        "page_obj": page_obj,
-    }
-    return render(
-        request,
-        "kitchen/view_assigned_cooks.html",
-        context
-    )
-
-
-def delete_assign_cook_to_dishes(request):
-    if request.method == "POST":
-        dish_id = request.POST.get("dish_id")
-        cook_ids = request.POST.getlist("cook_ids")
-        dish = Dish.objects.get(id=dish_id)
-        cooks = Cook.objects.filter(id__in=cook_ids)
-        dish.cooks.remove(*cooks)
-        return redirect("kitchen:dashboard")
-    dishes = Dish.objects.all()
-    cooks = Cook.objects.all()
-    context = {
-        "dishes": dishes,
-        "cooks": cooks,
-    }
-    return render(
-        request,
-        "kitchen/delete_assign_cook_to_dishes.html",
-        context
-    )
-
-
-def ingredients(request):
-    ingredients_list = Ingredient.objects.order_by("name")
-    paginator = Paginator(ingredients_list, 5)
-
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-    return render(
-        request, "kitchen/ingredients.html",
-        {"page_obj": page_obj}
-    )
-
-
-def add_ingredient(request):
-    if request.method == "POST":
-        name = request.POST.get("name")
-        ingredient = Ingredient(name=name)
-        ingredient.save()
-        return redirect("kitchen:dashboard")
-    return render(
-        request,
-        "kitchen/add_ingredient.html"
-    )
-
-
-def delete_ingredient(request):
-    ingredients = Ingredient.objects.all()
-    if request.method == "POST":
-        ingredient_id = request.POST.get("ingredient_id")
-        ingredient = Ingredient.objects.get(id=ingredient_id)
+class IngredientDeleteView(View):
+    def post(self, request, *args, **kwargs):
+        ingredient_id = kwargs.get("ingredient_id")
+        ingredient = get_object_or_404(Ingredient, id=ingredient_id)
         ingredient.delete()
-        return redirect("kitchen:dashboard")
-    return render(
-        request, "kitchen/delete_ingredient.html",
-        {"ingredients": ingredients}
-    )
+        return redirect("kitchen:ingredients")
 
 
-def delete_ingredient_list(request):
-    ingredients = Ingredient.objects.all()
-    return render(
-        request, "kitchen/delete_ingredient.html",
-        {"ingredients": ingredients}
-    )
+class IngredientDeleteInDishesView(View):
+    def post(self, request, *args, **kwargs):
+        ingredient_id = kwargs.get("id")
+        ingredient = get_object_or_404(Ingredient, id=ingredient_id)
+        dishes = Dish.objects.filter(ingredients=ingredient)
+        for dish in dishes:
+            dish.ingredients.remove(ingredient)
+        return redirect(request.META.get(
+            "HTTP_REFERER",
+            "redirect_if_referer_not_found")
+        )
+
+    def get(self, request, *args, **kwargs):
+        ingredient_id = kwargs.get("id")
+        ingredient = get_object_or_404(Ingredient, id=ingredient_id)
+        return render(
+            request,
+            "kitchen/ingredients.html",
+            {"ingredient": ingredient}
+        )
 
 
-def add_dishtype(request):
-    if request.method == "POST":
-        name = request.POST.get("name")
-        dishtype = DishType(name=name)
-        dishtype.save()
-        return redirect("kitchen:dashboard")
-    return render(
-        request, "kitchen/add_dishtype.html"
-    )
+class CreateIngredientInDishesView(View):
+    def post(self, request, *args, **kwargs):
+        dish_id = kwargs.get("id")
+        dish = get_object_or_404(Dish, id=dish_id)
+        form = IngredientForm(request.POST)
+        if form.is_valid():
+            ingredient = form.save()
+            dish.ingredients.add(ingredient)
+            return redirect("kitchen:dishes")
+        return render(
+            request,
+            "kitchen/create_ingredient_in_dishes.html",
+            {"form": form, "dish": dish}
+        )
+
+    def get(self, request, *args, **kwargs):
+        dish_id = kwargs.get("id")
+        dish = get_object_or_404(Dish, id=dish_id)
+        form = IngredientForm()
+        return render(
+            request,
+            "kitchen/create_ingredient_in_dishes.html",
+            {"form": form, "dish": dish}
+        )
 
 
-def delete_dishtype(request):
-    dishtypes = DishType.objects.all()
-    if request.method == "POST":
-        dishtype_id = request.POST.get("dishtype_id")
-        dishtype = DishType.objects.get(id=dishtype_id)
-        dishtype.delete()
-        return redirect("kitchen:dashboard")
-    return render(
-        request, "kitchen/delete_dishtype.html",
-        {"dishtypes": dishtypes}
-    )
+class CookListView(ListView):
+    model = Cook
+    template_name = "kitchen/cooks.html"
+    context_object_name = "cook_list"
+    paginate_by = 8
+
+    def get_queryset(self):
+        full_name = self.request.GET.get("full_name")
+        queryset = super().get_queryset()
+        if full_name:
+            queryset = queryset.annotate(
+                full_name=Concat(
+                    "first_name", Value(" "),
+                    "last_name", output_field=CharField()
+                )
+            ).filter(full_name__icontains=full_name)
+        return queryset.filter(
+            years_of_experience__gt=0
+        ).order_by("first_name")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["query"] = self.request.GET.get("full_name", "")
+        return context
 
 
-def delete_dishtype_list(request):
-    dishtypes = DishType.objects.all()
-    return render(
-        request, "kitchen/delete_dishtype.html",
-        {"dishtypes": dishtypes}
-    )
+class CookCreateView(View):
+    def post(self, request, *args, **kwargs):
+        form = CookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("kitchen:cooks")
+        return render(
+            request,
+            "kitchen/cook_form.html",
+            {"form": form}
+        )
+
+    def get(self, request, *args, **kwargs):
+        form = CookForm()
+        return render(
+            request,
+            "kitchen/cook_form.html",
+            {"form": form}
+        )
 
 
-def dishtypes(request):
-    dishtypes_list = DishType.objects.all()
-    paginator = Paginator(dishtypes_list, 5)
+class CookDeleteView(View):
+    def post(self, request, *args, **kwargs):
+        cook_id = kwargs.get("id")
+        cook = get_object_or_404(Cook, id=cook_id)
+        cook.delete()
+        return redirect("kitchen:cooks")
 
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    def get(self, request, *args, **kwargs):
+        return render(request, "kitchen/cooks.html")
 
-    context = {
-        "page_obj": page_obj,
-    }
-    return render(request, "kitchen/dishtypes.html", context)
+
+class AddDishToCookView(View):
+    def post(self, request, *args, **kwargs):
+        cook_id = kwargs.get("cook_id")
+        cook = get_object_or_404(Cook, id=cook_id)
+        form = DishForm(request.POST)
+        if form.is_valid():
+            dish = form.save()
+            cook.dishes.add(dish)
+            return redirect("kitchen:cooks")
+        return render(
+            request,
+            "kitchen/add_dish_to_cook.html",
+            {"form": form, "cook": cook}
+        )
+
+    def get(self, request, *args, **kwargs):
+        cook_id = kwargs.get("cook_id")
+        cook = get_object_or_404(Cook, id=cook_id)
+        form = DishForm()
+        return render(
+            request,
+            "kitchen/add_dish_to_cook.html",
+            {"form": form, "cook": cook}
+        )

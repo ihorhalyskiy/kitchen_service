@@ -2,17 +2,49 @@
 
 {% block content %}
 <div class="title-container">
-    <h1 class="assigned-cooks-title">Cooks</h1>
+    <div class="header-buttons">
+        <a href="javascript:history.back()" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+        <h1 class="assigned-cooks-title">Cooks</h1>
+        <form method="get" action="{% url 'kitchen:cooks' %}" class="search-form">
+            <input type="text" name="full_name" placeholder="Search cooks" value="{{ query|default_if_none:'' }}">
+            <button type="submit">Search</button>
+        </form>
+        <a href="{% url 'kitchen:cooks_create' %}" class="btn-create">Add Cook</a>
+    </div>
 </div>
 
-<div class="auth-container">
-    <div class="auth-box">
-        <ul class="cooks-list">
-            {% for cook in page_obj %}
-                <li class="cook-item">{{ cook.get_full_name }}</li>
-            {% endfor %}
-        </ul>
-    </div>
+<div class="cooks-container">
+    <ul class="cook-list">
+        {% for cook in page_obj %}
+            <li class="cook-item">
+                <form method="post" action="{% url 'kitchen:cook_delete' cook.id %}" class="delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+                <h2 class="cook-name">{{ cook.first_name }} {{ cook.last_name }}</h2>
+                <p class="cook-experience">{{ cook.years_of_experience }} years of experience</p>
+                <ul class="dishes-list">
+                    {% for dish in cook.dishes.all %}
+                        <li>
+                            <div class="cooks-dish-item-container">
+                                <h3 class="dish-name">{{ dish.name }}</h3>
+                                <form method="post" action="{% url 'kitchen:dish_remove_from_cook' dish.id cook.id %}" class="dish-delete-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="cook_id" value="{{ cook.id }}">
+                                    <button type="submit" class="btn-dish-delete">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'kitchen:add_dish_to_cook' cook.id %}" class="btn-add-dish">Add Dish</a>
+            </li>
+        {% endfor %}
+    </ul>
 </div>
 
 <div class="pagination">
@@ -28,7 +60,7 @@
 
         {% if page_obj.has_next %}
             <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">&raquo; last</a>
         {% endif %}
     </span>
 </div>
