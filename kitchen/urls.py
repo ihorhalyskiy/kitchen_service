@@ -1,10 +1,10 @@
 from django.urls import path
 
-from . import views
+from kitchen import views
 
 from django.contrib.auth import views as auth_views
 
-from .views import (
+from kitchen.views import (
     CookListView,
     KitchenInfoView,
     DishesView,
