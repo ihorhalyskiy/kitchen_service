@@ -55,7 +55,7 @@ urlpatterns = [
         name="dishes_create"
     ),  # сторінка створення нової страви
     path(
-        "dishes/delete/<int:id>/",
+        "dishes/delete/<int:pk>/",
         DishDeleteView.as_view(),
         name="dish_delete"
     ),  # видалення страви

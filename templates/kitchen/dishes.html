@@ -17,7 +17,7 @@
     <ul class="dish-list">
         {% for dish in dishes_page %}
             <li class="dish-item">
-                <form method="post" action="{% url 'kitchen:dish_delete' dish.id %}" class="delete-form">
+                <form method="post" action="{% url 'kitchen:dish_delete' dish.pk %}" class="delete-form">
                     {% csrf_token %}
                     <button type="submit" class="btn-delete">
                         <i class="fas fa-trash-alt"></i>

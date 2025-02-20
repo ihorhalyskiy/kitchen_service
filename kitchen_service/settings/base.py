@@ -1,4 +1,5 @@
 import os
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -11,14 +12,14 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
-    "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "kitchen",
     "debug_toolbar",
     "crispy_forms",
     "crispy_bootstrap4",
+    "kitchen",
+    "django.contrib.contenttypes",
 ]
 
 
