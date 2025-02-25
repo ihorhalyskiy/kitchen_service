@@ -1,26 +1,19 @@
 from django.contrib import messages
-
-from django.core.paginator import Paginator
-
-from django.db.models import Value, CharField
-
-from django.db.models.functions import Concat
-
-from django.urls import reverse_lazy
-
-from django.views import View
-
 from django.contrib.auth import (
     authenticate,
     login,
     get_user_model
 )
+from django.core.paginator import Paginator
+from django.db.models import Value, CharField
+from django.db.models.functions import Concat
 from django.shortcuts import (
     redirect,
     render,
     get_object_or_404
 )
-
+from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import (
     ListView,
     CreateView,
@@ -34,7 +27,6 @@ from kitchen.forms import (
     IngredientForm,
     CookForm
 )
-
 from kitchen.models import (
     Dish,
     Cook,
