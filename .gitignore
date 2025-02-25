@@ -7,8 +7,5 @@ kitchen_service/models.py
 kitchen_service/admin.py
 kitchen_service/apps.py
 .env
-/dump.json!/db.sqlite3
-
-/.env
 /db.sqlite3
 /dump.json
