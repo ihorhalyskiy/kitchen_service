@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="add-dish-title-container">
+    <div class="add-dish-header-buttons">
+        <a href="javascript:history.back()" class="add-dish-btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+        <h1 class="add-dish-assigned-cooks-title">Add Dish to {{ cook.first_name }} {{ cook.last_name }}</h1>
+    </div>
+</div>
+
+<div class="add-dish-content-container">
+    <form method="post" class="add-dish-form">
+        {% csrf_token %}
+        <div class="add-dish-form-group">
+            <label for="dish_name">Dish Name:</label>
+            <input type="text" id="dish_name" name="dish_name" required class="add-dish-form-control">
+        </div>
+        <div class="add-dish-btn-container">
+            <button type="submit" class="add-dish-btn-submit">Add Dish</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

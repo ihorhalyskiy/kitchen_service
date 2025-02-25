@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="create-cook-title-container">
+    <div class="create-cook-header-buttons">
+        <a href="javascript:history.back()" class="create-cook-btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+        <h1 class="create-cook-assigned-cooks-title">Add Cook</h1>
+    </div>
+</div>
+
+<div class="create-cook-content-container">
+    <form method="post" class="create-cook-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="create-cook-btn-submit">Add Cook</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="create-ingredient-title-container">
+    <div class="create-ingredient-header-buttons">
+        <a href="javascript:history.back()" class="create-ingredient-btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+        <h1 class="create-ingredient-assigned-cooks-title">Add Ingredient to {{ dish.name }}</h1>
+    </div>
+</div>
+
+<div class="create-ingredient-content-container">
+    <form method="post" class="create-ingredient-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="create-ingredient-btn-submit">Add Ingredient</button>
+    </form>
+</div>
+{% endblock %}

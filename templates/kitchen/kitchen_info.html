@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-content">
+    <div class="content-container">
+        <div class="title-container">
+            <h1 class="assigned-cooks-title">Kitchen info</h1>
+        </div>
+
+        <div class="dish-list">
+            {% for dish in page_obj %}
+                <div class="dish-block">
+                    <h2>{{ dish.name }}</h2>
+                    <p class="dish-type"><strong>DishType:</strong> {{ dish.dish_type.name }}</p>
+                    <p class="ingredients"><strong>Ingredients:</strong> {{ dish.ingredients.all|join:", " }}</p>
+                    <p class="cooks"><strong>Cooks:</strong> {{ dish.cooks.all|join:", " }}</p>
+                    <p class="price"><strong>Price:</strong> ${{ dish.price }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,1488 @@
+/* ===== Основні стилі для всіх сторінок ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #3e3e3e, #000000);
+    color: #fff;
+}
+
+/* ===== Навігаційна панель та шапка ===== */
+.main-header {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    color: #ff6f61;
+}
+
+.logo {
+    font-size: 1.2rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.logo:hover:not(.no-hover) {
+    color: #ff6f61;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    margin-right: 15px;
+    font-size: 1rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-link i {
+    margin-right: 5px;
+}
+
+.nav-link:hover {
+    color: #ff6f61;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.auth-section form {
+    display: inline;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.logout-btn i {
+    margin-right: 5px;
+}
+
+.logout-btn:hover {
+    color: #ff6f61;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+/* ===== Основний контент та блоки ===== */
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.content-container {
+    max-width: 1200px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Сторінка авторизації ===== */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+.auth-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.logo.no-hover i, .logo.no-hover h1 {
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.remember-me input {
+    margin-right: 5px;
+}
+
+.remember-me label {
+    color: #fff;
+}
+
+.btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.btn-small {
+    width: 100%;
+}
+
+.btn-primary {
+    background: #ff6f61;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #ff564f;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a636a;
+}
+
+.auth-links a {
+    display: block;
+    margin-top: 10px;
+    color: white;
+}
+
+/* ===== Сторінка реєстрації ===== */
+.auth-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-box .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.auth-box .btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.auth-box .btn-primary {
+    background: #ff6f61;
+    color: white;
+}
+
+.auth-box .btn-primary:hover {
+    background: #ff564f;
+}
+
+/* ===== Головна сторінка ===== */
+.dish-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.dish-block {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: calc(50% - 20px);
+    min-width: 250px;
+    text-align: center;
+}
+
+.dish-block h2 {
+    margin-bottom: 10px;
+    color: white;
+}
+
+.dish-block p {
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+
+.pagination .step-links a {
+    color: #ff6f61;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+
+
+/* Стилі для заголовку сторінки додавання інгредієнта */
+.create-ingredient-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 40px;
+}
+
+.create-ingredient-header-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.create-ingredient-assigned-cooks-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.create-ingredient-btn-back {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.create-ingredient-btn-back:hover {
+    background: #ff4c4c;
+}
+
+/* Стилі для форми додавання інгредієнта */
+.create-ingredient-content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.create-ingredient-form {
+    width: 100%;
+}
+
+.create-ingredient-form input, .create-ingredient-form button {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.create-ingredient-btn-submit {
+    background: #ff6f61;
+    color: white;
+    cursor: pointer;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.create-ingredient-btn-submit:hover {
+    background: #ff4c4c;
+}
+
+/* Стиль для сторінки  страв */
+.create-dish-title-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 40px;
+}
+.create-dish-btn-back{
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    position: absolute;
+    left: 10px;
+}
+.btn-dish-btn-back:hover {
+    background: #ff4c4c;
+}
+.create-dish-title {
+    font-size: 1.5rem;
+    color: white;
+}
+
+/* Стилі для форми додавання страви */
+.create-dish-auth-box form select {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 0.875rem;
+    border-radius: 5px;
+}
+
+.create-dish-auth-box form select option {
+    background: rgba(255, 255, 255, 0.1);
+    color: black;
+}
+
+.create-dish-auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+.create-dish-auth-box {
+    width: 100%;
+}
+
+.create-dish-auth-box form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-dish-auth-box form .form-group {
+    width: calc(100% - 40px);
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.create-dish-auth-box form input,
+.create-dish-auth-box form select,
+.create-dish-auth-box form textarea,
+.create-dish-auth-box form button {
+    width: 60%;
+    padding: 5px;
+    font-size: 0.875rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    margin: 10px auto;
+}
+
+/* Поле для введення кухаря однострокове */
+.create-dish-auth-box form input[name='cooks_text'] {
+    width: 60%;
+    padding: 5px;
+    font-size: 0.875rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    margin: 10px auto;
+}
+
+
+.create-dish-btn-submit {
+    background: #ff6f61;
+    color: white;
+    cursor: pointer;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.create-dish-btn-submit:hover {
+    background: #ff4c4c;
+}
+/* стилі для сторінки страв*/
+.search-form {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.search-form input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+    margin-right: 10px;
+}
+
+.search-form button {
+    padding: 10px 15px;
+    background: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background: #ff4c4c;
+}
+.search-results-container {
+    margin-bottom: 40px;
+    width: 1200px;
+}
+
+.search-results-container h2 {
+    text-align: center;
+    color: #ff6f61;
+}
+
+
+
+.dishes-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap;
+}
+
+.dish-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+    list-style: none;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.dish-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 475px;
+    margin-bottom: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.delete-form {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.btn-delete {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.btn-delete:hover {
+    color: #ff4c4c;
+}
+
+.dish-name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+.dish-type {
+    margin-top: 5px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.dish-description {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 45%;
+    color: #ccc;
+    text-align: right;
+    font-size: 1.2rem;
+}
+
+.btn-add-ingredient {
+    background: #ff6f61;
+    color: white;
+    padding: 3px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: -5px;
+    font-size: 0.75rem;
+    width: 21px;
+}
+
+.btn-add-ingredient:hover {
+    background: #5a636a;
+}
+
+/* Add this class to move the button lower */
+.btn-move-lower {
+    margin-top: -10px;
+}
+.ingredients-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.ingredient-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+}
+
+.ingredient-delete-form {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.btn-ingredient-delete {
+    background: none;
+    border: none;
+    color: #ff6f61;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-ingredient-delete:hover {
+    color: #ff4c4c;
+}
+
+.dish-price {
+    margin: 0;
+    font-weight: bold;
+    color: #ff6f61;
+}
+
+.delete-button {
+    float: right;
+    margin-left: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ingredients ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Пагінація */
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+.pagination .step-links a:hover {
+    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.pagination .current {
+    color: #fff;
+}
+
+.btn-back:hover {
+    background: #ff4c4c;
+}
+
+.btn-create {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.btn-create:hover {
+    background: #ff4c4c;
+}
+
+.header-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.assigned-cooks-title {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.price-container {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-edit-price {
+    background: #ff6f61;
+    color: white;
+    border: none;
+    padding: 3px 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.70rem;
+}
+
+.btn-edit-price:hover {
+    background: #ff4c4c;
+}
+/* Стилі для заголовку сторінки редагування ціни */
+.edit-dish-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 40px;
+}
+
+.edit-dish-header-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.edit-dish-assigned-cooks-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.edit-dish-btn-back {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.edit-dish-btn-back:hover {
+    background: #ff4c4c;
+}
+
+/* Стилі для форми редагування ціни страви */
+.edit-dish-price-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.edit-dish-form-group {
+    width: calc(100% - 40px);
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-dish-form-group label {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.edit-dish-form-group input {
+    width: 100%;
+    padding: 5px;
+    font-size: 0.875rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.edit-dish-form-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 40px);
+    margin: 20px auto 0;
+    gap: 20px;
+}
+
+.edit-dish-btn-update, .edit-dish-btn-cancel {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.edit-dish-btn-update:hover, .edit-dish-btn-cancel:hover {
+    background: #ff4c4c;
+}
+
+/* ===== Сторінка kitchen info ===== */
+.kitchen-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.kitchen-info .dish-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.kitchen-info .dish-block {
+    flex: 0 1 calc(33.33% - 20px);
+    margin-bottom: 20px;
+}
+
+
+
+.dish-block {
+    flex: 0 1 calc(33.33% - 20px);
+    margin-bottom: 20px;
+}
+
+.kitchen-service-btn {
+    color: #ff6f61;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.kitchen-service-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    transform: scale(1);
+}
+
+h2 {
+    color: white;
+}
+
+/* Стиль для контейнера кухарів */
+.cooks-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap;
+}
+
+.cook-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+    list-style: none;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cook-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 475px;
+    margin-bottom: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.delete-form {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.btn-delete {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.btn-delete:hover {
+    color: #ff4c4c;
+}
+
+.cook-name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.cook-experience {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #ccc;
+    font-size: 1rem;
+}
+
+.dishes-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.dishes-list li {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cooks-dish-item-container {
+    color: #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.dish-name {
+    margin-right: 10px;
+    flex-grow: 1;
+}
+
+.btn-dish-delete {
+    background: none;
+    border: none;
+    color: #ff6f61;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-dish-delete:hover {
+    color: #ff4c4c;
+}
+
+.btn-add-dish {
+    background: #ff6f61; /* Фон */
+    color: white;
+    padding: 2px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.btn-add-dish:hover {
+    background: #ff4c4c;
+}
+
+/* Пагінація */
+.pagination .step-links a {
+    color: #ff6f61;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.pagination .step-links a:hover {
+    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.pagination .current {
+    color: #fff;
+}
+
+
+
+.btn-back:hover {
+    background: #ff4c4c;
+}
+
+.btn-create {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.btn-create:hover {
+    background: #ff4c4c;
+}
+
+
+
+.assigned-cooks-title {
+    flex-grow: 1;
+    text-align: center;
+    margin-right: auto;
+}
+.search-form {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.search-form input[type="text"] {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.search-form button {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background: #ff4c4c;
+}
+/* стилі для сторінки інгрідієнтів */
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 40px;
+}
+
+
+.search-form {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.search-form input[type="text"] {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.search-form button {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background: #ff4c4c;
+}
+
+.btn-back, .btn-create {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-back:hover, .btn-create:hover {
+    background: #ff4c4c;
+}
+
+.ingredient-specific-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap;
+}
+
+.ingredient-specific-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 0;
+    list-style: none;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.ingredient-specific-item {
+    background: rgb(94, 94, 94);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #e5e4e4;
+    height: 50px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.ingredient-specific-delete-form {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+}
+
+.ingredient-specific-btn-delete {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.ingredient-specific-btn-delete:hover {
+    color: #ff4c4c;
+}
+
+/* ===== Сторінка додавання інгрідієнтів ===== */
+.create-ingredient-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 40px;
+}
+
+.create-ingredient-header-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+}
+
+.create-ingredient-btn-back, .create-ingredient-btn-create {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.create-ingredient-btn-back:hover, .create-ingredient-btn-create:hover {
+    background: #ff4c4c;
+}
+
+.create-ingredient-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.create-ingredient-form-container h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.create-ingredient-form {
+    width: 100%;
+}
+
+.create-ingredient-form input, .create-ingredient-form button {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.create-ingredient-form button {
+    background: #ff6f61;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.create-ingredient-form button:hover {
+    background: #ff4c4c;
+}
+
+/* ===== Сторінка створення кухарів  ===== */
+.cook-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 40px;
+}
+
+.cook-header-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.cook-assigned-cooks-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
+    margin-left: -80px;
+}
+
+.cook-btn-back {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cook-btn-back:hover {
+    background: #ff4c4c;
+}
+
+/* Стилі для заголовку сторінки додавання або редагування кухаря */
+.create-cook-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 40px;
+}
+
+.create-cook-header-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.create-cook-assigned-cooks-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.create-cook-btn-back {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.create-cook-btn-back:hover {
+    background: #ff4c4c;
+}
+
+/* Стилі для форми додавання кухаря */
+.create-cook-content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.create-cook-form {
+    width: 100%;
+}
+
+.create-cook-form input, .create-cook-form button {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.create-cook-form button {
+    background: #ff6f61;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.create-cook-form button:hover {
+    background: #ff4c4c;
+}
+/* стилі сторніки додавання страви до кухара  */
+.add-dish-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+.add-dish-header-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.add-dish-btn-back,
+.add-dish-btn-create {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.add-dish-btn-back:hover,
+.add-dish-btn-create:hover {
+    background: #ff4c4c;
+}
+
+.add-dish-assigned-cooks-title {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.add-dish-content-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.add-dish-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-dish-form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.add-dish-form-control {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background: transparent;
+    color: #fff;
+    width: 300px;
+}
+
+.add-dish-form-control::placeholder {
+    color: #ccc;
+}
+
+.add-dish-btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+.add-dish-btn-submit {
+    background: #ff6f61;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 20px;
+    text-align: center;
+    width: 150px;
+}
+
+.add-dish-btn-submit:hover {
+    background: #ff4c4c;
+}

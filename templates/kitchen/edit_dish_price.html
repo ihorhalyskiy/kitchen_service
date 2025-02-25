@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="edit-dish-title-container">
+    <div class="edit-dish-header-buttons">
+        <a href="javascript:history.back()" class="edit-dish-btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+        <h1 class="edit-dish-assigned-cooks-title">Edit Dish Price</h1>
+    </div>
+</div>
+
+<div class="edit-dish-price-container">
+    <form method="post" action="{% url 'kitchen:edit_dish_price' dish.id %}">
+        {% csrf_token %}
+        <div class="edit-dish-form-group">
+            <label for="dish-name">Dish Name:</label>
+            <input type="text" id="dish-name" name="dish_name" value="{{ dish.name }}" disabled>
+        </div>
+        <div class="edit-dish-form-group">
+            <label for="dish-price">Price:</label>
+            <input type="number" id="dish-price" name="dish_price" value="{{ dish.price }}" step="0.01">
+        </div>
+        <div class="edit-dish-form-buttons">
+            <button type="submit" class="edit-dish-btn-update">Update</button>
+            <a href="javascript:history.back()" class="edit-dish-btn-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

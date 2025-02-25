@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="title-container">
+    <div class="header-buttons">
+        <a href="javascript:history.back()" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+        <h1 class="assigned-cooks-title">Dishes</h1>
+        <form method="GET" action="{% url 'kitchen:dishes' %}" class="search-form">
+            <input type="text" name="dish_name" placeholder="Search dishes..." value="{{ request.GET.dish_name }}">
+            <button type="submit">Search</button>
+        </form>
+        <a href="{% url 'kitchen:dishes_create' %}" class="btn-create">Create Dish</a>
+    </div>
+</div>
+
+<div class="dishes-container">
+    <ul class="dish-list">
+        {% for dish in dishes_page %}
+            <li class="dish-item">
+                <form method="post" action="{% url 'kitchen:dish_delete' dish.pk %}" class="delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+                <h2 class="dish-name">{{ dish.name }}</h2>
+                <p class="dish-type">{{ dish.dish_type }}</p>
+                <p class="dish-description">{{ dish.description }}</p>
+                <a href="{% url 'kitchen:create_ingredient_in_dishes' dish.id %}" class="btn-add-ingredient btn-move-lower">
+                    <i class="fas fa-plus"></i>
+                </a>
+                <ul class="ingredients-list">
+                    {% for ingredient in dish.ingredients.all %}
+                        <li class="ingredient-item">
+                            <span>{{ ingredient }}</span>
+                            <form method="post" action="{% url 'kitchen:ingredient_delete' ingredient.id %}" class="ingredient-delete-form">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-ingredient-delete">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="price-container">
+                    <a href="{% url 'kitchen:edit_dish_price' dish.pk %}" class="btn-edit-price">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <p class="dish-price"><strong>Price:</strong> ${{ dish.price }}</p>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">&raquo; last</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

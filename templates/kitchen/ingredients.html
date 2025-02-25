@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="title-container">
+    <div class="header-buttons">
+        <a href="javascript:history.back()" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+        <h1 class="assigned-cooks-title">Ingredients</h1>
+        <form method="get" action="{% url 'kitchen:ingredients' %}" class="search-form">
+            <input type="text" name="ingredient_name" placeholder="Search ingredients" value="{{ query|default_if_none:'' }}">
+            <button type="submit">Search</button>
+        </form>
+        <a href="{% url 'kitchen:ingredients_create' %}" class="btn-create">Add Ingredient</a>
+    </div>
+</div>
+
+<div class="ingredient-specific-container">
+    <div class="ingredient-specific-box">
+        <ul class="ingredient-specific-list">
+            {% for ingredient in page_obj %}
+                <li class="ingredient-specific-item">
+                    <form method="post" action="{% url 'kitchen:delete_specific_ingredient' ingredient.id %}" class="ingredient-specific-delete-form">
+                        {% csrf_token %}
+                        <button type="submit" class="ingredient-specific-btn-delete">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                    {{ ingredient.name }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">&raquo; last</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
